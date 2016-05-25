@@ -8,6 +8,7 @@ venv*
 .python-version
 *.pyc
 __pycache__dist
+tests/__pycache__/
 
 
 dist*
