@@ -19,11 +19,25 @@ def test_retrieve_an_empty_usecase_list():
 def test_list_authors():
     repo = mock.Mock()
     repo.list.return_value = [
-        Author('Isaac Asimov', date(1920, 1, 2)),
-        Author('J.K. Rowling', date(1965, 7, 31))
+        Author(1, 'Isaac Asimov', date(1920, 1, 2)),
+        Author(2, 'J.K. Rowling', date(1965, 7, 31))
     ]
 
     uc = auth.AuthorListUseCase(repo)
     response = uc.execute()
 
     assert len(response) == 2
+
+
+def test_filter_author_list_by_name():
+    repo = mock.Mock()
+    repo.list.return_value = [
+        Author(1, 'Isaac Asimov', date(1920, 1, 2))
+    ]
+
+    uc = auth.AuthorListUseCase(repo)
+    response = uc.execute({'name': 'Asimov'})
+
+    repo.list.assert_called_with({'name': 'Asimov'})
+
+    assert len(response) == 1
