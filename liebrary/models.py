@@ -5,6 +5,6 @@ class Author:
         self.birth_date = birth_date
 
     def __eq__(self, other):
-        return self.id == self.id and \
+        return self.id == other.id and \
                self.name == other.name and \
                self.birth_date == other.birth_date
